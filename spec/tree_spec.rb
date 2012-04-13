@@ -52,4 +52,12 @@ describe Tree do
 
     result.must_equal path
   end
+
+  it 'should find a synonym' do
+    path = '/home/music|sports/favorites|misc'
+    tree = Tree.build path
+    result = Tree.synonym tree, '/home/sports'
+
+    result.must_equal '/home/music'
+  end
 end

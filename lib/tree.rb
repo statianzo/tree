@@ -18,4 +18,16 @@ class Tree
     path << '/' << tree.keys.reject{|k| k =~ /-/}.join('|')
     self.collapse(tree.values.first, path)
   end
+
+  def self.synonym(tree, path)
+    names = path.split('/').reject{|p| p == ''}
+    target = names.pop
+    parent = names.reduce(tree) { |memo, name| memo[name] }
+
+    target_keys = parent[target].keys
+    match = parent.reject{|k,_| k == target}
+                  .detect([]){|(_,v)| v.keys == target_keys}[0]
+
+    "/#{names.join('/')}/#{match}" if match
+  end
 end
