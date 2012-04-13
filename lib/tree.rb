@@ -12,4 +12,10 @@ class Tree
     end
     existing
   end
+
+  def self.collapse(tree, path="")
+    return path if tree.empty?
+    path << '/' << tree.keys.reject{|k| k =~ /-/}.join('|')
+    Tree.collapse(tree.values.first, path)
+  end
 end

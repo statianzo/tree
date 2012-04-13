@@ -44,4 +44,12 @@ describe Tree do
       }
     })
   end
+
+  it 'should collapse a tree' do
+    path = '/home/music|sports/favorites|misc'
+    tree = Tree.build path
+    result = Tree.collapse tree
+
+    result.must_equal path
+  end
 end
