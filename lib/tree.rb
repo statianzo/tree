@@ -7,7 +7,7 @@ class Tree
     parent = existing
     (1..subheads.length).each do |i|
       subheads.combination(i).each do |combo|
-        Tree.build "/#{tail}", parent[combo.join('-')] ||= {}
+        self.build "/#{tail}", parent[combo.join('-')] ||= {}
       end
     end
     existing
@@ -16,6 +16,6 @@ class Tree
   def self.collapse(tree, path="")
     return path if tree.empty?
     path << '/' << tree.keys.reject{|k| k =~ /-/}.join('|')
-    Tree.collapse(tree.values.first, path)
+    self.collapse(tree.values.first, path)
   end
 end
