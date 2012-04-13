@@ -4,10 +4,9 @@ class Tree
 
     subheads = head.split('|')
 
-    parent = existing
     (1..subheads.length).each do |i|
       subheads.combination(i).each do |combo|
-        self.build "/#{tail}", parent[combo.join('-')] ||= {}
+        self.build "/#{tail}", existing[combo.join('-')] ||= {}
       end
     end
     existing
