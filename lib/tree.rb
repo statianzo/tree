@@ -25,8 +25,8 @@ class Tree
 
     target_keys = parent[target].keys
     match = parent.reject{|k,_| k == target}
-                  .detect([]){|(_,v)| v.keys == target_keys}[0]
+                  .detect{|(_,v)| v.keys == target_keys}
 
-    "/#{names.join('/')}/#{match}" if match
+    "/#{names.join('/')}/#{match[0]}" if match
   end
 end

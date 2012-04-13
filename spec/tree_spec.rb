@@ -84,4 +84,12 @@ describe Tree do
 
     result.must_equal '/home/music'
   end
+
+  it 'should return nil if synonym not found' do
+    path = '/home/music/trance'
+    tree = Tree.build path
+    result = Tree.synonym tree, '/home/music'
+
+    result.must_be_nil
+  end
 end
