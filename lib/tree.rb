@@ -1,12 +1,12 @@
 class Tree
   def self.build(path, existing = {})
-    nodes = path.split('/')
-                .reject{|p| p == ''}
-                .map{|p|p.to_sym}
+    _, head, tail = path.split('/',3)
+
+    subheads = head.split('|')
 
     parent = existing
-    nodes.each do |node|
-      parent = parent[node] ||= {}
+    subheads.each do |sub|
+      Tree.build "/#{tail}", parent[sub] ||= {}
     end
     existing
   end
