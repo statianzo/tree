@@ -18,10 +18,19 @@ describe Tree do
   end
 
   it 'should insert two leaves' do
+    skip #because combinatorial insert breaks this
     tree = Tree.build '/home/sports/football/'
     result = Tree.build '/home/sports/football/nfl|ncaa', tree
 
     result.must_equal({
       'home' => { 'sports' => { 'football' => { 'nfl' => {}, 'ncaa' => {} } } }})
+  end
+
+  it 'should insert combinatorially' do
+    tree = Tree.build '/home/music/'
+    result = Tree.build '/home/music/rap|rock|pop', tree
+
+    result.must_equal({
+      'home' => {'music' => {'rap' => {}, 'rock' => {}, 'pop' => {}, 'rap-rock' => {}, 'rap-pop' => {}, 'rock-pop' => {}, 'rap-rock-pop' => {} } }})
   end
 end
