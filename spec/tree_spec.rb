@@ -33,4 +33,15 @@ describe Tree do
     result.must_equal({
       'home' => {'music' => {'rap' => {}, 'rock' => {}, 'pop' => {}, 'rap-rock' => {}, 'rap-pop' => {}, 'rock-pop' => {}, 'rap-rock-pop' => {} } }})
   end
+
+  it 'should insert combinatorially at any level' do
+    result = Tree.build '/home/music|sports/favorites|misc'
+    result.must_equal({
+      'home' => {
+        'music' => {'favorites' => {}, 'misc' => {}, 'favorites-misc' => {}},
+        'sports' => {'favorites' => {}, 'misc' => {}, 'favorites-misc' => {}},
+        'music-sports' => {'favorites' => {}, 'misc' => {}, 'favorites-misc' => {}}
+      }
+    })
+  end
 end
